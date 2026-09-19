@@ -26,11 +26,13 @@ include 'connect.php';
         <th>Kuantitas</th>
         <th>Harga</th>
         <th>ID Pelanggan</th>
+        <th>Total</th>
     </tr>
 
 <?php
 
-$sql = "SELECT * FROM sales";
+$sql = 'SELECT id_transaksi, id_produk, tgl_transaksi, kuantitas, harga, id_pelanggan, harga*kuantitas as total 
+        FROM sales';
 
 $query = mysqli_query($conn, $sql);
 
@@ -38,16 +40,17 @@ if (!$query) {
     die("Query SELECT gagal: " . mysqli_error($conn));
 }
 
-while ($row = mysqli_fetch_row($query)) {
+while ($row = mysqli_fetch_array($query)) {
 
     echo "<tr>";
 
-    echo "<td>" . $row[0] . "</td>";
-    echo "<td>" . $row[1] . "</td>";
-    echo "<td>" . $row[2] . "</td>";
-    echo "<td>" . $row[3] . "</td>";
-    echo "<td>" . $row[4] . "</td>";
-    echo "<td>" . $row[5] . "</td>";
+    echo "<td>" . $row['id_transaksi'] . "</td>";
+    echo "<td>" . $row['id_produk'] . "</td>";
+    echo "<td>" . $row['tgl_transaksi'] . "</td>";
+    echo "<td>" . $row['kuantitas'] . "</td>";
+    echo "<td>" . $row['harga'] . "</td>";
+    echo "<td>" . $row['id_pelanggan'] . "</td>";
+    echo "<td>" . $row['total'] . "</td>";
 
     echo "</tr>";
 }
